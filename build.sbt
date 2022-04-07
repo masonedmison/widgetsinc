@@ -12,10 +12,12 @@ lazy val commonSettings = Seq(
   scalacOptions -= "-Xfatal-warnings",
   libraryDependencies ++= Seq(
     "eu.timepit" %% "refined" % Versions.refined,
+    "eu.timepit" %% "refined-cats" % Versions.refined,
     "dev.optics" %% "monocle-core" % Versions.monocle,
     "dev.optics" %% "monocle-macro" % Versions.monocle,
     "org.typelevel" %% "cats-effect" % Versions.catsEffect,
     "io.circe" %% "circe-generic" % Versions.circe,
+    "io.circe" %% "circe-refined" % Versions.circe,
   ),
 )
 
