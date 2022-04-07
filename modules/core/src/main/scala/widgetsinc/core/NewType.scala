@@ -3,11 +3,12 @@ package widgetsinc.core
 import cats.Show
 import cats.kernel.Eq
 import cats.kernel.Order
-import io.circe.Encoder
-import io.circe.Decoder
 
+import io.circe.Decoder
+import io.circe.Encoder
 import monocle.Iso
 
+// from g. volpe's FEDA
 abstract class Newtype[A](
   using
   eqv: Eq[A],

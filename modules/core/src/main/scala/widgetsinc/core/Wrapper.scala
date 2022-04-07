@@ -2,6 +2,7 @@ package widgetsinc.core
 
 import monocle.Iso
 
+// from g. volpe's FEDA
 trait Wrapper[A, B]:
   def iso: Iso[A, B]
 
