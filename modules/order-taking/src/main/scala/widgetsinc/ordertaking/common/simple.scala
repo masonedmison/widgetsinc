@@ -1,4 +1,5 @@
 package widgetsinc.ordertaking.common
+package simple
 
 import widgetsinc.core.Newtype
 import widgetsinc.core.RefNewtype
@@ -12,6 +13,7 @@ import eu.timepit.refined.collection
 import eu.timepit.refined.cats.*
 import eu.timepit.refined.boolean.And
 import eu.timepit.refined.numeric.Interval
+import eu.timepit.refined.types.string.NonEmptyString
 
 // must be non empty and contain @
 type EmailAddress = EmailAddress.Type
@@ -53,14 +55,14 @@ object Price extends RefNewtype[Double, constraints.Price]
 type BillingAmount = BillingAmount.Type
 object BillingAmount extends RefNewtype[Double, constraints.BillingAmount]
 
-type OrderType = UnitQuantity | KilogramQuantity
+type OrderQuantity = UnitQuantity | KilogramQuantity
 
 type ProductCode = WidgetCode | GizmoCode
 
 object constraints {
   type Widget = String Refined string.MatchesRegex["W[0-9]{4}"]
   type Gizmo = String Refined string.MatchesRegex["G[0-9]{3}"]
-  type Email = String Refined And[collection.NonEmpty, collection.Contains["@"]]
+  type Email = String Refined string.MatchesRegex[".*@.*\\.com"]
   type Zipcode = String Refined string.MatchesRegex["[0-9]{5}"]
   type UnitQuantity = Int Refined Interval.Open[1, 1000]
   type KilogramQuantity = Double Refined Interval.Open[0.5, 100.0]
