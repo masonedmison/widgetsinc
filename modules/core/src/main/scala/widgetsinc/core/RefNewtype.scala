@@ -7,6 +7,7 @@ import io.circe.Encoder
 import io.circe.Decoder
 import eu.timepit.refined.api.RefinedType
 import eu.timepit.refined.api.RefinedTypeOps
+import cats.implicits.*
 
 // from g. volpe's FEDA
 abstract class RefNewtype[T, RT](
@@ -21,4 +22,5 @@ abstract class RefNewtype[T, RT](
   object Ops extends RefinedTypeOps[RT, T]
 
   def from(t: T): Either[String, Type] = Ops.from(t).map(apply(_))
+  def fromOption(t: Option[T]): Either[String, Option[Type]] = t.fold(None.asRight[String])(from(_) map(Some.apply))
   def unsafeFrom(t: T): Type = apply(Ops.unsafeFrom(t))

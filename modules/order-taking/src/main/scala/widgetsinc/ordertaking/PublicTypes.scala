@@ -66,18 +66,12 @@ object PublicTypes:
 
   type PlaceOrderEvent = OrderPlaced | BillableOrderPlaced | OrderAcknowledgementSent
 
-  // sealed trait PlaceholderErr extends Exception {
-  //   override def getMessage(): String
-  // }
-
-  type Uri
-
   final case class ServiceInfo(name: String, endpoint: Uri)
 
   // final case
-  enum PlaceholderErr extends Exception:
+  enum PlaceOrderErr extends Exception:
     case PricingErr(msg: String)
     case RemoteServiceErr[E <: Throwable](service: ServiceInfo, exc: E)
     case ValidationErr(msg: String)
 
-  type PlaceOrder[F[_]] = UnvalidatedOrder => EitherT[F, PlaceholderErr, List[PlaceOrderEvent]]     
+  type PlaceOrder[F[_]] = UnvalidatedOrder => EitherT[F, PlaceOrderErr, List[PlaceOrderEvent]]

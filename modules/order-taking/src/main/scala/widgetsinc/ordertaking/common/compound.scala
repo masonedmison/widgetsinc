@@ -5,8 +5,6 @@ import simple.*
 
 import eu.timepit.refined.types.string.NonEmptyFiniteString
 
-private type String50 = NonEmptyFiniteString[50]
-
 case class PersonalName(firstName: String50, lastName: String50)
 
 case class CustomerInfo(name: PersonalName, email: EmailAddress)
@@ -17,5 +15,5 @@ case class Address(
   line3: Option[String50],
   line4: Option[String50],
   city: String50,
-  zipCode: ZipCode
+  zipCode: ZipCode,
 )
